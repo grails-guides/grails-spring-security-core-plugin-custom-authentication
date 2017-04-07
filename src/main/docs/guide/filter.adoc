@@ -17,6 +17,11 @@ You have several options:
 For this guide, we don't need to create a custom filter. Instead, we are using the `UsernamePasswordAuthenticationFilter`
 and overriding the `authenticationDetailsSource` bean used by that filter.
 
+[source,groovy]
+./grails-app/conf/spring/resources.groovy
+----
+include::{sourceDir}/grails-app/conf/spring/resources.groovy[indent=0,tag=authenticationDetailsSource]
+----
 
 [source,groovy]
 ./src/main/groovy/demo/TwoFactorAuthenticationDetailsSource.groovy
