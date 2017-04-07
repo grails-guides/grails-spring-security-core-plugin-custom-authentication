@@ -1,7 +1,10 @@
+// tag::providerNames[]
 grails.plugin.springsecurity.providerNames = [
 		'twoFactorAuthenticationProvider',
 		'anonymousAuthenticationProvider',
 		'rememberMeAuthenticationProvider']
+// end::providerNames[]
+
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'demo.User'

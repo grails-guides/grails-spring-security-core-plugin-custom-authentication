@@ -1,21 +1,20 @@
 import demo.CoordinateValidatorService
-import demo.TwoFactorAuthenticationFilter
+import demo.TwoFactorAuthenticationDetailsSource
 import demo.TwoFactorAuthenticationProvider
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy
 
 // Place your Spring DSL code here
 beans = {
 
-    twoFactorAuthenticationFilter(TwoFactorAuthenticationFilter) {
-        filterProcessesUrl = '/login/authenticate'
-        authenticationSuccessHandler = ref('authenticationSuccessHandler')
-        authenticationFailureHandler = ref('authenticationFailureHandler')
-        authenticationManager = ref('authenticationManager')
-        sessionAuthenticationStrategy = ref('sessionAuthenticationStrategy')
-    }
+    // tag::authenticationDetailsSource[]
+    authenticationDetailsSource(TwoFactorAuthenticationDetailsSource)
+    // end::authenticationDetailsSource[]
 
+    // tag::coordinateValidatorBeanDefinition[]
     coordinateValidator(CoordinateValidatorService)
+    // end::coordinateValidatorBeanDefinition[]
 
+    // tag::twoFactorAuthenticationProviderBeanDefinition[]
     twoFactorAuthenticationProvider(TwoFactorAuthenticationProvider) {
         coordinateValidator = ref('coordinateValidator')
         userDetailsService = ref('userDetailsService')
@@ -27,6 +26,7 @@ beans = {
         authoritiesMapper = ref('authoritiesMapper')
         hideUserNotFoundExceptions = true
     }
+    // end::twoFactorAuthenticationProviderBeanDefinition[]
 
     sessionAuthenticationStrategy(NullAuthenticatedSessionStrategy)
 }

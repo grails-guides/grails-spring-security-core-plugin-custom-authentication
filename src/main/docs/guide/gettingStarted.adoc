@@ -1,1 +1,2 @@
-In this guide you are going to...
+In this guide, you are going to write a custom authentication mechanism.
+Spring Security Plugin allows for a significant degree of customization which we are going to explore next.

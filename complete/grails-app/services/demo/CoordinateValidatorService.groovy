@@ -1,21 +1,17 @@
 package demo
 
-import grails.compiler.GrailsCompileStatic
+import grails.transaction.Transactional
+import groovy.transform.CompileStatic
 
-@GrailsCompileStatic
+@Transactional
+@CompileStatic
 class CoordinateValidatorService implements CoordinateValidator {
 
+    @Transactional(readOnly = true)
     @Override
-    boolean isValidValueForPositionAndUserName(String value, String position, String username) {
-
-        def criteria = SecurityCoordinate.createCriteria()
-        def result = criteria.get {
-            eq('position', position)
-            eq('value', value)
-            user {
-                eq('username', username)
-            }
-        }
-        result as boolean
+    boolean isValidValueForPositionAndUserName(String v, String p, String name) {
+        SecurityCoordinate.where {
+            position == p && value == v && user.username == name
+        }.count() as boolean
     }
 }

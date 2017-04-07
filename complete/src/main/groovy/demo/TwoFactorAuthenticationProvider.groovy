@@ -18,25 +18,18 @@ class TwoFactorAuthenticationProvider extends DaoAuthenticationProvider {
 
         super.additionalAuthenticationChecks(userDetails, authentication)
 
-        if (!(authentication instanceof TwoFactorAuthenticationToken)) {
-            logger.debug("Authentication failed: authentication is not a TwoFactorAuthenticationToken");
-            throw new BadCredentialsException(messages.getMessage(
-                    "AbstractUserDetailsAuthenticationProvider.badCredentials",
-                    "Bad credentials"));
-        }
+        Object details = authentication.details
 
-        def twoFactorAuthenticationToken = (TwoFactorAuthenticationToken) authentication
-
-        if ( !(twoFactorAuthenticationToken.principal instanceof TwoFactorPrincipal) ) {
+        if ( !(details instanceof TwoFactorAuthenticationDetails) ) {
             logger.debug("Authentication failed: authenticationToken principal is not a TwoFactorPrincipal");
             throw new BadCredentialsException(messages.getMessage(
                     "AbstractUserDetailsAuthenticationProvider.badCredentials",
                     "Bad credentials"));
         }
-        def principal = (TwoFactorPrincipal) twoFactorAuthenticationToken.principal
+        def twoFactorAuthenticationDetails = details as TwoFactorAuthenticationDetails
 
 
-        if ( !coordinateValidator.isValidValueForPositionAndUserName(principal.coordinateValue, principal.coordinatePosition, principal.name) ) {
+        if ( !coordinateValidator.isValidValueForPositionAndUserName(twoFactorAuthenticationDetails.coordinateValue, twoFactorAuthenticationDetails.coordinatePosition, authentication.name) ) {
             logger.debug("Authentication failed: coordiante note valid");
             throw new BadCredentialsException(messages.getMessage(
                     "AbstractUserDetailsAuthenticationProvider.badCredentials",
