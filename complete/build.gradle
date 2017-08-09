@@ -53,10 +53,12 @@ dependencies {
     runtime "org.apache.tomcat:tomcat-jdbc"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.2"
     testCompile "org.grails:grails-gorm-testing-support"
-    testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-web-testing-support"
-    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+    testCompile "org.grails.plugins:geb"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    testRuntime "org.seleniumhq.selenium:selenium-support:2.53.1"
+    testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
 
     // tag::dependencySSC[]
     compile 'org.grails.plugins:spring-security-core:3.2.0.M1'
@@ -73,4 +75,8 @@ bootRun {
 assets {
     minifyJs = true
     minifyCss = true
+}
+
+integrationTest {
+    systemProperties System.properties
 }
