@@ -11,7 +11,7 @@ class TwoFactorAuthenticationDetailsSource extends WebAuthenticationDetailsSourc
 
     @Override
     WebAuthenticationDetails buildDetails(HttpServletRequest context) {
-        def details = new TwoFactorAuthenticationDetails(context)
+        TwoFactorAuthenticationDetails details = new TwoFactorAuthenticationDetails(context)
 
         String position = obtainCoordinatePosition(context)
         details.coordinatePosition = position

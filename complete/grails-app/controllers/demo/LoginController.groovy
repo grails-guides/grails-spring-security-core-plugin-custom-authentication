@@ -9,7 +9,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
     def auth() {
 
-        def conf = getConf()
+        ConfigObject conf = getConf()
 
         if (springSecurityService.isLoggedIn()) {
             redirect uri: conf.successHandler.defaultTargetUrl
@@ -17,7 +17,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
         }
 
         Collections.shuffle(coordinatePositions)
-        def position = coordinatePositions.first()
+        String position = coordinatePositions.first()
 
         String postUrl = request.contextPath + conf.apf.filterProcessesUrl
         render view: 'auth', model: [postUrl: postUrl,
