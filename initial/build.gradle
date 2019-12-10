@@ -72,7 +72,8 @@ bootRun {
             '-noverify',
             '-XX:TieredStopAtLevel=1',
             '-Xmx1024m')
-    addResources = true
+    sourceResources sourceSets.main
+
 }
 
 
