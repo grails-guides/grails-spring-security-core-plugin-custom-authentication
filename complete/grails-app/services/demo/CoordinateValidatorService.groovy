@@ -1,13 +1,14 @@
 package demo
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.ReadOnly
+import grails.gorm.transactions.Transactional
 import groovy.transform.CompileStatic
 
 @Transactional
 @CompileStatic
 class CoordinateValidatorService implements CoordinateValidator {
 
-    @Transactional(readOnly = true)
+    @ReadOnly
     @Override
     boolean isValidValueForPositionAndUserName(String v, String p, String name) {
         SecurityCoordinate.where {
