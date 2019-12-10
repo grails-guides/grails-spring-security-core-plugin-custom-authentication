@@ -15,7 +15,8 @@ class BankControllerSpec extends GebSpec {
         at LoginPage
 
         when:
-        login('sherlock', 'elementary', BootStrap.BANKCARD[position()])
+        LoginPage loginPage = browser.page(LoginPage)
+        loginPage.login('sherlock', 'elementary', BootStrap.BANKCARD[loginPage.position()])
 
         then:
         driver.pageSource.contains('Welcome to your bank')
