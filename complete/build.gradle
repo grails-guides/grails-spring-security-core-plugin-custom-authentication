@@ -67,7 +67,7 @@ dependencies {
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
 
     // tag::dependencySSC[]
-    compile 'org.grails.plugins:spring-security-core:3.2.0.M1'
+    compile 'org.grails.plugins:spring-security-core:4.0.1.BUILD-SNAPSHOT'
     // end::dependencySSC[]
 
 }
