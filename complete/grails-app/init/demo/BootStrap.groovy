@@ -5,6 +5,9 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class BootStrap {
 
+    RoleService roleService
+    UserService userService
+    UserRoleService userRoleService
     static Map<String, String> BANKCARD =
             ['A1': '10', 'A2': '84', 'A3': '93', 'A4': '12', 'A5': '92',
              'A6': '58', 'A7': '38', 'A8': '28', 'A9': '36', 'A10': '02',
@@ -17,20 +20,19 @@ class BootStrap {
             ]
 
     def init = { servletContext ->
-        def authorities = ['ROLE_CLIENT']
-        authorities.each {
-            if ( !Role.findByAuthority(it) ) {
-                new Role(authority: it).save()
+        List<String> authorities = ['ROLE_CLIENT']
+        authorities.each { authority ->
+            if ( !roleService.findByAuthority(authority) ) {
+                roleService.save(authority)
             }
         }
-        if ( !User.findByUsername('sherlock') ) {
-            def u = new User(username: 'sherlock', password: 'elementary')
+        if ( !userService.findByUsername('sherlock') ) {
+            User u = new User(username: 'sherlock', password: 'elementary')
             BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
-            u.save()
-            def ur = new UserRole(user: u, role:  Role.findByAuthority('ROLE_CLIENT'))
-            ur.save()
+            u = userService.save(u)
+            userRoleService.save(u, roleService.findByAuthority('ROLE_CLIENT'))
         }
     }
 
