@@ -76,7 +76,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.141.59"
 
     // tag::dependencySSC[]
-    compile 'org.grails.plugins:spring-security-core:4.0.1.BUILD-SNAPSHOT'
+    compile 'org.grails.plugins:spring-security-core:4.0.3'
     // end::dependencySSC[]
 }
 
