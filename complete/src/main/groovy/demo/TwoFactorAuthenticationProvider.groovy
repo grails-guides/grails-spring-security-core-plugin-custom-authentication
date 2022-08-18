@@ -30,7 +30,7 @@ class TwoFactorAuthenticationProvider extends DaoAuthenticationProvider {
 
 
         if ( !coordinateValidator.isValidValueForPositionAndUserName(twoFactorAuthenticationDetails.coordinateValue, twoFactorAuthenticationDetails.coordinatePosition, authentication.name) ) {
-            logger.debug("Authentication failed: coordiante note valid");
+            logger.debug("Authentication failed: coordinate is not valid");
             throw new BadCredentialsException(messages.getMessage(
                     "AbstractUserDetailsAuthenticationProvider.badCredentials",
                     "Bad credentials"));
